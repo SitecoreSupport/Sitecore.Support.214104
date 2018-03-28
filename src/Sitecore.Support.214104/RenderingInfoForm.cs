@@ -12,8 +12,9 @@ using Sitecore.Web.UI.Sheer;
 using Sitecore.Web.UI.WebControls;
 using Sitecore.Web.UI.XmlControls;
 using Sitecore.Xml;
+using System.Web;
 
-namespace Sitecore.Shell.Applications.Debugger.RenderingInfo
+namespace Sitecore.Support.Shell.Applications.Debugger.RenderingInfo
 {
 
   /// <summary>
@@ -198,11 +199,11 @@ namespace Sitecore.Shell.Applications.Debugger.RenderingInfo
         foreach (XmlNode node in nodes)
         {
           string key = XmlUtil.GetAttribute("name", node);
-          string value = node.InnerXml;
+          string value = HttpUtility.HtmlEncode(node.InnerXml);
 
           details.Append("<tr><td>");
 
-          details.Append("<b>" + key + "</b>");
+          details.Append("<b>" + HttpUtility.HtmlEncode(key) + "</b>");
           details.Append(":</td><td>");
           details.Append(value);
 
